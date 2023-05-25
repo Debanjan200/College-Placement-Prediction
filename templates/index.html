@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/style.css') }}">
+  <!-- <link rel= "stylesheet" type= "text/css" href= "style.css"> -->
+
+  <title>College Placement Prediction</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container contact-form">
+            <div class="contact-image">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/010/398/242/small/star-student-academy-logo-concept-vector.jpg" alt="rocket_contact"/>
+            </div>
+            <form action="{{ url_for('predict')}}" method="post" enctype="multipart/form-data">
+                <h3>College Placement Prediction</h3>
+               <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Enter Age</label>
+                            <input type="number" name="age" class="form-control" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Select Gender</label>
+                            <select class="form-control" name="gender" id="exampleFormControlSelect1" required>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">How many internship you have done?</label>
+                            <input type="number" name="internship" class="form-control" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">How many backlog do you have?</label>
+                            <input type="number" name="backlog" class="form-control" required/>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="submit" name="btnSubmit" class="btnContact btn btn-outline-success" value="Send Message"/>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Choose you branch in Engineering</label>
+                            <select class="form-control" name="stream" id="exampleFormControlSelect1" required>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Electronics And Communication">Electronics And Communication</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Civil">Civil</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Enter your CGPA(Out of 10)</label>
+                            <input type="number" name="CGPA" class="form-control" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Do you have a hostel in college?</label>
+                            <select class="form-control" name="hostel" id="exampleFormControlSelect1" required>
+                              <option value="1">Yes</option>
+                              <option value="0">No</option>
+                            </select>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+
+                <br><br><br>
+
+                <div class="col-md-10">
+                    {% if prediction==1 %}
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                            <use xlink:href="#check-circle-fill" />
+                        </svg>
+                        <div>
+                            <p>
+                                Predicted: {{st}}
+                            </p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if prediction==0 %}
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                        Predicted: {{st}}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+            </form>
+            
+</div>
+
+
+</body>
+
+</html>
